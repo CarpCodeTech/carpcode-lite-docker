@@ -1,11 +1,11 @@
-# kaldi-docker
+# carpcode-lite-docker
  Build kaldi inside docker containers with option for CUDA support
 
 To build and run basic kaldi image use the following commands:
 
 ```
-docker build -t kaldi kaldi/
-docker run -ti kaldi
+docker build -t carpcode-lite kaldi/
+docker run -ti carpcode-lite
 ```
 
 To compile Kaldi with CUDA support you must first install the 
@@ -14,8 +14,8 @@ To compile Kaldi with CUDA support you must first install the
 Then run
 
 ```
-nvidia-docker build -t kaldi kaldi-gpu/
-nvidia-docker run -ti kaldi
+nvidia-docker build -t carpcode-lite kaldi-gpu/
+nvidia-docker run -ti carpcode-lite
 ```
 
 You can set the following arguments when building Kaldi:
