@@ -19,6 +19,8 @@ python PrepareAudio.py /opt/audio wav.scp spk2utt
 egs/wsj/s5/utils/split_scp.pl wav.scp $split_scps
 egs/wsj/s5/utils/split_scp.pl spk2utt $split_spk2utt
 
+python Monitor.py &
+
 perl egs/wsj/s5/utils/run.pl JOB=1:$JOB JOB.log\
  src/online2bin/online2-wav-nnet3-latgen-faster \
  --do-endpointing=false --print-args=false --verbose=-1 \
