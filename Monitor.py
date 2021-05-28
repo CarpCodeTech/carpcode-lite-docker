@@ -1,16 +1,15 @@
 import os
-import tqdm
+from tqdm import tqdm
 import subprocess
 
-
 def GetProcessed(log_file):
-    if not os.path.exists(log_file)
+    if not os.path.exists(log_file):
         return 0
 
     count = 0
     lines = open(log_file, 'r').readlines()
     for line in lines:
-        if "sentence" in line:
+        if "Decoded utterance" in line:
             count += 0
 
     return count

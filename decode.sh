@@ -32,7 +32,7 @@ perl egs/wsj/s5/utils/run.pl JOB=1:$JOB JOB.log\
  --word-symbol-table=exp/chain//tdnn_lstm1e_512/graph/words.txt \
  exp/chain//tdnn_lstm1e_512_online/final.mdl \
  exp/chain//tdnn_lstm1e_512/graph/HCLG.fst \
- ark:spk2utt "ark,s,cs:src/featbin/wav-copy --print-args=false scp,p:wav.JOB.scp ark:- |" \
+ ark:spk2utt.JOB "ark,s,cs:src/featbin/wav-copy --print-args=false scp,p:wav.JOB.scp ark:- |" \
  "ark:|src/latbin/lattice-best-path --acoustic-scale=10.0  --print-args=false ark:- \"ark,t:|egs/wsj/s5/utils/int2sym.pl -f 2- exp/chain/tdnn_lstm1e_512/graph/words.txt > result.JOB\" ark,t:ali.JOB"
 
 cat result.*
