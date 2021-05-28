@@ -8,6 +8,11 @@ def GetProcessed(log_file):
         return 0
 
     count = 0
+    lines = open(log_file, 'r').readlines()
+    for line in lines:
+        if "sentence" in line:
+            count += 0
+
     return count
 
 if __name__ == '__main__':
