@@ -11,3 +11,4 @@ RUN pip install tqdm
 ADD exp/. /opt/kaldi/exp
 ADD PrepareAudio.py /opt/kaldi/
 ADD decode.sh /opt/kaldi/
+ADD Monitor.py /opt/kaldi/
