@@ -5,6 +5,8 @@ if [ $# == 1 ] ; then
     JOB=$1
 fi
 
+echo $JOB > JOB
+
 split_scps=""
 split_spk2utt=""
 for n in $(seq $JOB); do
