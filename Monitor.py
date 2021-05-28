@@ -17,7 +17,7 @@ if __name__ == '__main__':
     log_list = ["%i.log" % (i + 1) for i in range(JOB)]
     
     Processed = 0
-    pbar = tqdm(total=TotalNum, desc = "Prcocessed Audio Files")
+    pbar = tqdm(total=TotalNum, desc = "Prcocessed Audio Files", disable=True)
     while (Processed < TotalNum):
         new_count = 0
         for log in log_list:
