@@ -19,7 +19,7 @@ python PrepareAudio.py /opt/audio wav.scp spk2utt
 egs/wsj/s5/utils/split_scp.pl wav.scp $split_scps
 egs/wsj/s5/utils/split_scp.pl spk2utt $split_spk2utt
 
-python Monitor.py &
+PYTHONIOENCODING=utf-8 python Monitor.py &
 
 perl egs/wsj/s5/utils/run.pl JOB=1:$JOB JOB.log\
  src/online2bin/online2-wav-nnet3-latgen-faster \
@@ -35,4 +35,6 @@ perl egs/wsj/s5/utils/run.pl JOB=1:$JOB JOB.log\
  ark:spk2utt.JOB "ark,s,cs:src/featbin/wav-copy --print-args=false scp,p:wav.JOB.scp ark:- |" \
  "ark:|src/latbin/lattice-best-path --acoustic-scale=10.0  --print-args=false ark:- \"ark,t:|egs/wsj/s5/utils/int2sym.pl -f 2- exp/chain/tdnn_lstm1e_512/graph/words.txt > result.JOB\" ark,t:ali.JOB"
 
-cat result.*
+rm *.log
+cat result.* > /opt/audio/result.txt
+echo "识别结果（result.txt）已保存到测试音频文件夹"
