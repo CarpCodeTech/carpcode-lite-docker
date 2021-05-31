@@ -14,6 +14,8 @@ for n in $(seq $JOB); do
     split_spk2utt="$split_spk2utt spk2utt.$n"
 done
 
+rm *.log &> /dev/null
+
 # Generate and Split wav.scp and spk2utt
 python PrepareAudio.py /opt/audio wav.scp spk2utt
 egs/wsj/s5/utils/split_scp.pl wav.scp $split_scps
@@ -33,8 +35,9 @@ perl egs/wsj/s5/utils/run.pl JOB=1:$JOB JOB.log\
  exp/chain//tdnn_lstm1e_512_online/final.mdl \
  exp/chain//tdnn_lstm1e_512/graph/HCLG.fst \
  ark:spk2utt.JOB "ark,s,cs:src/featbin/wav-copy --print-args=false scp,p:wav.JOB.scp ark:- |" \
- "ark:|src/latbin/lattice-best-path --acoustic-scale=10.0  --print-args=false ark:- \"ark,t:|egs/wsj/s5/utils/int2sym.pl -f 2- exp/chain/tdnn_lstm1e_512/graph/words.txt > result.JOB\" ark,t:ali.JOB"
+ "ark:|src/latbin/lattice-scale --print-args=false --acoustic-scale=10.0 ark:- ark:- | gzip -c > lat.JOB.gz"
 
-rm *.log
-cat result.* > /opt/audio/result.txt
+cat *.log > full.log
+python GetResult.py
+cp result.txt /opt/audio/
 echo "识别结果（result.txt）已保存到测试音频文件夹"
